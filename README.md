@@ -1,15 +1,110 @@
 # SocialNet-API
 
-AS A social media startup
-I WANT an API for my social network that uses a NoSQL database
-SO THAT my website can handle large amounts of unstructured data
+## Table of Contents
 
-GIVEN a social network API
-WHEN I enter the command to invoke the application
-THEN my server is started and the Mongoose models are synced to the MongoDB database
-WHEN I open API GET routes in Insomnia Core for users and thoughts
-THEN the data for each of these routes is displayed in a formatted JSON
-WHEN I test API POST, PUT, and DELETE routes in Insomnia Core
-THEN I am able to successfully create, update, and delete users and thoughts in my database
-WHEN I test API POST and DELETE routes in Insomnia Core
-THEN I am able to successfully create and delete reactions to thoughts and add and remove friends to a user’s friend list
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Contributing](#contributing)
+- [Tests](#tests)
+- [Questions](#questions)
+
+## Description
+
+This project is a sample back-end for a social media site. It can create users, their thoughts, and reactions to those thoughts. It can also create a friends list.
+
+## Installation
+
+You will need express and mongoose.
+
+## Usage
+
+API calls are made as follows:
+
+### User Routes
+
+localhost:3001/api/users
+
+- getAllUsers
+- createUser
+
+        JSON: {
+            "username": "<desiredUsername>",
+            "email": "<desiredEmail>"
+        }
+
+localhost:3001/api/users/:id
+
+- getUserById
+- updateUser
+
+        JSON: {
+            "username": "<desiredName>",
+            "email": "<desiredEmail>"
+        }
+
+- deleteUser
+
+localhost:3001/api/:usersId/:friendId
+
+- addFriend
+- removeFriend
+
+### Thought Routes
+
+localhost:3001/api/thoughts
+
+- getAllThoughts
+- createThought
+
+        JSON: {
+            "thoughtText": "<thoughtText>",
+            "username": "<userName>",
+            "userId": "<userId>"
+        }
+
+localhost:3001/api/thoughts/:id
+
+- getThoughtById
+- updateThought
+
+        JSON: {
+            "thoughtText": "<thoughtText>",
+            "username": "<userName>",
+            "userId": "<userId>"
+        }
+
+- deleteThought
+
+localhost:3001/api/thoughts/:thoughtId/reactions
+
+- createReaction
+
+        JSON: {
+            "reactionBody": "<reactionText",
+            "username": "<userName>",
+            "userId": "<userId>"
+        }
+
+localhost:3001/api/thoughts/:thoughtId/:reactionId
+
+- deleteRaction
+
+## License
+
+This project is covered under the Unliscensed license:
+
+## Contributing
+
+Contributions welcome, but not necessary.
+
+## Tests
+
+Insomnia Core used to confirm all routes functioning as intended.
+
+## Questions
+
+Find me on GitHub: https://github.com/Concord511
+
+Email me with questions: concord511@gmail.com

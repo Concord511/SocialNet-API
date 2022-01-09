@@ -63,19 +63,7 @@ const userController = {
                     res.status(404).json({ message: 'No user found with this id! '});
                     return;
                 }
-                return dbUserData;
-            })
-            .then(dbUserData => {
-                console.log(dbUserData.username);
-                console.log(dbUserData.thoughts.length);
-                if (dbUserData.thoughts.length) {
-                    Thought.deleteMany({ username: dbUserData.username })
-                    .then(() => res.json({ message: 'User and thoughts deleted'}))
-                    .catch(err => {
-                        console.log(err);
-                        res.status(400).json(err);
-                    });
-                }
+                res.json(dbUserData);
             })
             .catch(err => res.json(err));
     },
