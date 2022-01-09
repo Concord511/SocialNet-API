@@ -8,7 +8,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 mongoose.connect('mongodb://localhost/SocialNet-API', {
-    useFindAndModify: false,
     useNewUrlParser: true,
     useUnifiedTopology: true
 });

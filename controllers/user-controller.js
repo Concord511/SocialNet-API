@@ -58,7 +58,25 @@ const userController = {
     // delete user
     deleteUser({ params }, res) {
         User.findOneAndDelete({ _id: params.id })
-            .then(dbUserData => res.json(dbUserData))
+            .then(dbUserData => {
+                if (!dbUserData) {
+                    res.status(404).json({ message: 'No user found with this id! '});
+                    return;
+                }
+                return dbUserData;
+            })
+            .then(dbUserData => {
+                console.log(dbUserData.username);
+                console.log(dbUserData.thoughts.length);
+                if (dbUserData.thoughts.length) {
+                    Thought.deleteMany({ username: dbUserData.username })
+                    .then(() => res.json({ message: 'User and thoughts deleted'}))
+                    .catch(err => {
+                        console.log(err);
+                        res.status(400).json(err);
+                    });
+                }
+            })
             .catch(err => res.json(err));
     },
 
@@ -80,7 +98,7 @@ const userController = {
     },
 
     // delete friend
-    deleteFriend({ params }, res) {
+    removeFriend({ params }, res) {
         User.findOneAndUpdate(
             { _id: params.userId },
             { $pull: { friends: params.friendId } },
@@ -97,4 +115,4 @@ const userController = {
     }
 };
 
-module.export = userController;
+module.exports = userController;

@@ -12,8 +12,8 @@ const ReactionSchema = new Schema(
             required: true
         },
         username: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
+            type: String,
+            required: true
         },
         createdAt: {
             type: Date,
@@ -43,8 +43,7 @@ const ThoughtSchema = new Schema(
             get: createdAtVal => dateFormat(createdAtVal)
         },
         username: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
+            type: String,
             required: true
         },
         reactions: [ReactionSchema]
